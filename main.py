@@ -48,7 +48,7 @@ def menu():
             loja.listarAirCooler()
             loja.listarWaterCooler()
         elif opcao == "2":
-            print("\nEscolha o tipo de produto para comprar:")
+            print("\nEscolha a categoria de produto que deseja comprar:")
             print("1 - Processador")
             print("2 - Placa de Vídeo")
             print("3 - Air Cooler")

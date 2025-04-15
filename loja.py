@@ -68,37 +68,63 @@ class Loja:
 
     def pagamento(self):
         total = self.carrinho.total()
-        print(f"\nTotal da compra: R$ {total:.2f}")
-        print("Forma de pagamento:")
-        print("1 - À vista (5% de desconto)")
-        print("2 - Pix (5% de desconto)")
-        print("3 - Cartão de débito")
-        print("4 - Cartão de crédito:\n1x: sem juros\n2x: sem juros\n3x: 3.78% de juros\n4x: 5.69% de juros\n5x: 7.25% de juros")
-        opcao = input("Escolha a forma de pagamento: ")
-
-        if opcao == "1":
-            total *= 0.95
-        elif opcao == "2":
-            total *= 0.95
-        elif opcao == "3":
-            print(f"Valor final: R$ {total:.2f}")
-        elif opcao == "4":
-            parcelas = int(input("Número de parcelas: "))
-            if parcelas == 1 or parcelas == 2:
-                print(f"Valor final: R$ {total:.2f}")
-            elif parcelas == 3:
-                total *= 1.0378  
-            elif parcelas == 4:
-                total *= 1.0569  
-            elif parcelas == 5:
-                total *= 1.0725  
-            else:
-                print("Número de parcelas inválido.")
-                return
-        else:
-            print("Opção de pagamento inválida.")
+        if total == 0:
+            print("O carrinho está vazio. Adicione itens antes de prosseguir para o pagamento.")
             return
+        print(f"Total  da compra: R${total:.2f}")
+        while True:
+            print("Forma de pagamento:")
+            print("1 - À vista (5% de desconto)")
+            print("2 - Pix (5% de desconto)")
+            print("3 - Cartão de débito")
+            print("4 - Cartão de crédito:")
+            print("5 - Retornar ao menu")
+            opcao = input("Escolha a forma de pagamento: ")
 
-        print(f"Valor final: R$ {total:.2f}")
-
+            if opcao == "1":
+                total *= 0.95
+                print(f"Valor Total com desconto: R${total:.2f}")
+                valor = float(input(("Digite o valor em dinheiro: ")))
+                if valor > total:
+                    troco = valor - total
+                    print(f"Troco: {troco:.2f}")
+                    break
+                elif valor == total:
+                    print("Pagamento realizado com sucesso!\n")
+                    break
+                else:
+                    print("Valor insuficiente. Tente novamente.\n")
+                    continue
+            elif opcao == "2":
+                total *= 0.95
+                print("Pagamento realizado com sucesso!\n")
+                break
+            elif opcao == "3":
+                print(f"Valor final: R${total:.2f}")
+                print("Pagamento realizado com sucesso!\n")
+                break
+            elif opcao == "4":
+                print("1x: sem juros\n2x: sem juros\n3x: 3.78% de juros\n4x: 5.69% de juros\n5x: 7.25% de juros: ")
+                parcelas = int(input("Número de parcelas: "))
+                if parcelas == 1 or parcelas == 2:
+                    print(f"Valor final: R${total:.2f}")
+                    print("Pagamento realizado com sucesso!\n")
+                    break
+                elif parcelas == 3:
+                    total *= 1.0378  
+                elif parcelas == 4:
+                    total *= 1.0569  
+                elif parcelas == 5:
+                    total *= 1.0725  
+                else:
+                    print("Número de parcelas inválido. Tente novamente.\n")
+                    continue
+                print(f"Valor final: R${total:.2f}\n")
+                print("Pagamento realizado com sucesso!")
+                break
+            elif opcao == "5":
+                break
+            else:
+                print("Opção de pagamento inválida. Tente novamente.\n")
+                continue
 
